@@ -1,0 +1,1 @@
+/SegNet/CamVid/val/0016E5_07959.png /SegNet/CamVid/valannot/0016E5_07959.png
