@@ -43,8 +43,9 @@ def predict(test, n):
     return prob
 
 def main():
-    model_num = 3
-    image_list = ['val0.txt','val10.txt','val11.txt','val12.txt','val13.txt','val15.txt','val16.txt','val18.txt','val1.txt','val21.txt','val22.txt','val3.txt','val5.txt','val8.txt','val9.txt']
+    model_num = 30
+    image_list = ['val0.txt','val1.txt','val3.txt','val9.txt','val11.txt','val13.txt','val18.txt','val22.txt','val28.txt','val32.txt','val34.txt']
+    # image_list = ['val0.txt','val10.txt','val11.txt','val12.txt','val13.txt','val15.txt','val16.txt','val18.txt','val1.txt','val21.txt','val22.txt','val3.txt','val5.txt','val8.txt','val9.txt']
     for val in image_list:
         print("loading data...")
         val_num = val.split('.')[0].split('val')[1]
