@@ -16,7 +16,7 @@ log_filepath='./logs/'
 data_shape = 360*480
 
 # class_weighting = [0.2595, 0.1826, 4.5640, 0.1417, 0.5051, 0.3826, 9.6446, 1.8418, 6.6823, 6.2478, 3.0, 7.3614]
-class_weighting = [1.0, 1.0]
+class_weighting = [3.0, 1.0]
 
 
 ## set gpu usage
