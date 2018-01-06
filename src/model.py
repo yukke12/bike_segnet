@@ -6,7 +6,7 @@ from keras.layers.normalization import BatchNormalization
 from keras.models import Model
 from keras.utils import np_utils
 
-def SegNet(input_shape=(360, 480, 3), classes=12):
+def SegNet(input_shape=(360, 480, 3), classes=2):
     ### @ https://github.com/alexgkendall/SegNet-Tutorial/blob/master/Example_Models/bayesian_segnet_camvid.prototxt
     img_input = Input(shape=input_shape)
     x = img_input
@@ -55,3 +55,4 @@ def SegNet(input_shape=(360, 480, 3), classes=12):
     x = Activation("softmax")(x)
     model = Model(img_input, x)
     return model
+

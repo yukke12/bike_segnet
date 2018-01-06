@@ -8,14 +8,16 @@ from model import SegNet
 import dataset
 
 input_shape = (360, 480, 3)
-classes = 12
-epochs = 100
-batch_size = 8
+classes = 2
+epochs = 30
+batch_size = 1
 log_filepath='./logs/'
 
 data_shape = 360*480
 
-class_weighting = [0.2595, 0.1826, 4.5640, 0.1417, 0.5051, 0.3826, 9.6446, 1.8418, 6.6823, 6.2478, 3.0, 7.3614]
+# class_weighting = [0.2595, 0.1826, 4.5640, 0.1417, 0.5051, 0.3826, 9.6446, 1.8418, 6.6823, 6.2478, 3.0, 7.3614]
+class_weighting = [1.0, 1.0]
+
 
 ## set gpu usage
 import tensorflow as tf
@@ -39,17 +41,18 @@ def main():
 
     tb_cb = keras.callbacks.TensorBoard(log_dir=log_filepath, histogram_freq=1, write_graph=True, write_images=True)
     fpath = 'weights.{epoch:02d}.hdf5'
-    mc_cb = keras.callbacks.ModelCheckpoint(fpath, monitor='val_loss', verbose=0, save_best_only=False, save_weights_only=False, mode='auto', period=1)
+    mc_cb = keras.callbacks.ModelCheckpoint(fpath, monitor='val_loss', verbose=0, save_best_only=False, save_weights_only=False, mode='auto', period=3)
 
     print("creating model...")
     model = SegNet(input_shape=input_shape, classes=classes)
     model.compile(loss="categorical_crossentropy", optimizer='adadelta', metrics=["accuracy"])
 
     model.fit(train_X, train_Y, batch_size=batch_size, epochs=epochs,
-              verbose=1, class_weight=class_weighting , validation_data=(test_X[0:15], test_Y[0:15]), shuffle=True
+              verbose=1, class_weight=class_weighting , validation_data=(test_X[0:5], test_Y[0:5]), shuffle=True
               , callbacks=[mc_cb ,tb_cb])
 
     model.save('seg.h5')
 
 if __name__ == '__main__':
     main()
+

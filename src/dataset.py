@@ -6,12 +6,12 @@ from keras.applications import imagenet_utils
 
 import os
 
-DataPath = '../data/CamVid/'
+DataPath = '../data/bike_scratch/'
 data_shape = 360*480
 
 
 class DataSet:
-    def __init__(self, classes=12, train_file='train.txt', test_file='test.txt'):
+    def __init__(self, classes=2, train_file='train.txt', test_file='test.txt'):
         self.train_file = train_file
         self.test_file = test_file
         self.data_shape = 360*480
@@ -32,7 +32,7 @@ class DataSet:
         return norm
 
     def one_hot_it(self, labels):
-        x = np.zeros([360,480,12])
+        x = np.zeros([360,480,2])
         for i in range(360):
             for j in range(480):
                 x[i,j,labels[i][j]] = 1
@@ -81,4 +81,6 @@ class DataSet:
         return imagenet_utils.preprocess_input(X)
 
     def reshape_labels(self, y):
+        print(len(y), self.data_shape, self.classes)
         return np.reshape(y, (len(y), self.data_shape, self.classes))
+
